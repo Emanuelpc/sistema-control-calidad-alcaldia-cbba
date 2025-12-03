@@ -62,7 +62,43 @@
             <span class="nav-link-text ms-1">User Management</span>
         </a>
       </li>
-      <li class="nav-item mt-2">
+      <li class="nav-item">
+          <a class="nav-link disabled" href="#">
+              <div class="icon icon-shape icon-sm bg-gradient-primary shadow text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa fa-briefcase text-white"></i>
+              </div>
+              <span class="nav-link-text ms-1">Servicios</span>
+          </a>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link disabled" href="#">
+              <div class="icon icon-shape icon-sm bg-gradient-success shadow text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa fa-vial text-white"></i>
+              </div>
+              <span class="nav-link-text ms-1">Ensayos</span>
+          </a>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link disabled" href="#">
+              <div class="icon icon-shape icon-sm bg-gradient-warning shadow text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa fa-folder-open text-white"></i>
+              </div>
+              <span class="nav-link-text ms-1">Proyectos</span>
+          </a>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link disabled" href="#">
+              <div class="icon icon-shape icon-sm bg-gradient-info shadow text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa fa-user-nurse text-white"></i>
+              </div>
+              <span class="nav-link-text ms-1">Laboratoristas</span>
+          </a>
+      </li>
+
+      <!--<li class="nav-item mt-2">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Example pages</h6>
       </li>
       <li class="nav-item">
@@ -146,7 +182,7 @@
           </div>
           <span class="nav-link-text ms-1">RTL</span>
         </a>
-      </li>
+      </li>-->
       <li class="nav-item mt-3">
         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
       </li>
@@ -213,13 +249,13 @@
           <span class="nav-link-text ms-1">Sign Up</span>
         </a>
       </li>
-      <li class="nav-link mb-0">
+      <!--<li class="nav-link mb-0">
         <a href="https://www.creative-tim.com/product/soft-ui-dashboard-pro-laravel" class="btn btn-primary btn-md active px-5 text-white" target="_blank" role="button" aria-pressed="true">
             Upgrade to PRO</a>
-      </li>
+      </li>-->
     </ul>
   </div>
-  <div class="sidenav-footer mx-3 ">
+  <!--<div class="sidenav-footer mx-3 ">
     <div class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
       <div class="full-background" style="background-image: url('../assets/img/curved-images/white-curved.jpeg')"></div>
       <div class="card-body text-start p-3 w-100">
@@ -233,5 +269,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </aside>
