@@ -40,20 +40,31 @@ class AdministracionService
     public function guardarLaboratorista(array $data)
     {
         return DB::transaction(function () use ($data) {
+            // Generamos el ID
             $id = $this->repo->getNextId('laboratoristas');
+            
+            // Creamos el registro con TODOS los campos
             return Laboratorista::create([
                 'num_sec' => $id,
                 'nombre' => $data['nombre'],
-                'tipo' => 1, // Por defecto
+                'usr' => $data['usr'],      // <--- Antes faltaba esto
+                'pwd' => $data['pwd'],      // <--- Antes faltaba esto
+                'tipo' => $data['tipo'],    // <--- Antes faltaba esto
                 'estado' => 'AC'
             ]);
         });
     }
 
-    public function bajaLaboratorista($id)
+    // Reemplaza o agrega esto
+    public function alternarEstadoLaboratorista($id)
     {
-        $l = Laboratorista::find($id);
-        if($l) $l->update(['estado' => 'IN']);
+        $lab = Laboratorista::find($id);
+        
+        if ($lab) {
+            // Si es AC lo vuelve IN, si es IN lo vuelve AC
+            $nuevoEstado = ($lab->estado === 'AC') ? 'IN' : 'AC';
+            $lab->update(['estado' => $nuevoEstado]);
+        }
     }
 
     // --- ENSAYOS ---

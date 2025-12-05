@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Servicios\CrearSolicitud;
+use App\Livewire\Admin\Laboratoristas\Listar;
+use App\Livewire\Admin\Laboratoristas\Crear;
+use App\Livewire\Admin\Laboratoristas\Editar;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,8 +72,13 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 	// ... rutas existentes
 	Route::get('/admin/proyectos', \App\Livewire\Admin\Proyectos::class)->name('admin.proyectos');
-	Route::get('/admin/laboratoristas', \App\Livewire\Admin\Laboratoristas::class)->name('admin.laboratoristas');
+	//Route::get('/admin/laboratoristas', \App\Livewire\Admin\Laboratoristas::class)->name('admin.laboratoristas');
 	Route::get('/admin/ensayos', \App\Livewire\Admin\Ensayos::class)->name('admin.ensayos');
+	// Módulo Laboratoristas (CRUD Separado)
+    Route::get('/admin/laboratoristas', Listar::class)->name('admin.laboratoristas.index');
+    Route::get('/admin/laboratoristas/crear', Crear::class)->name('admin.laboratoristas.crear');
+    Route::get('/admin/laboratoristas/{id}/editar', Editar::class)->name('admin.laboratoristas.editar');
+	
 });
 
 
