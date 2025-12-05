@@ -9,7 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-
+use App\Livewire\Servicios\CrearSolicitud;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
+	// ... rutas existentes
+	Route::get('/admin/proyectos', \App\Livewire\Admin\Proyectos::class)->name('admin.proyectos');
+	Route::get('/admin/laboratoristas', \App\Livewire\Admin\Laboratoristas::class)->name('admin.laboratoristas');
+	Route::get('/admin/ensayos', \App\Livewire\Admin\Ensayos::class)->name('admin.ensayos');
 });
 
 
@@ -86,3 +90,6 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/login', function () {
     return view('session/login-session');
 })->name('login');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/servicios/crear', CrearSolicitud::class)->name('servicios.crear');
+});
