@@ -1,4 +1,4 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start bg-white" id="sidenav-main">
   
   {{-- CABECERA DEL SIDEBAR --}}
   <div class="sidenav-header">
@@ -11,7 +11,8 @@
 
   <hr class="horizontal dark mt-0">
 
-  <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
+  {{-- CUERPO DEL SIDEBAR (Con Scroll ajustado) --}}
+  <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main" style="height: calc(100vh - 120px);">
     <ul class="navbar-nav">
       
       {{-- 1. INICIO --}}
@@ -44,7 +45,9 @@
       </li>
 
       <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('admin.proyectos') ? 'active' : '' }}" href="{{ route('admin.proyectos') }}">
+          {{-- NOTA: El routeIs ahora busca cualquier sub-ruta de proyectos con el * --}}
+          <a class="nav-link {{ request()->routeIs('admin.proyectos*') ? 'active' : '' }}" 
+             href="{{ route('admin.proyectos.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <i class="fas fa-city text-dark text-lg"></i>
               </div>
@@ -68,6 +71,18 @@
                   <i class="fas fa-users text-dark text-lg"></i>
               </div>
               <span class="nav-link-text ms-1">Personal</span>
+          </a>
+      </li>
+
+      <li class="nav-item">
+          {{-- Detecta si estamos en cualquier página de responsables (index, crear o editar) --}}
+          <a class="nav-link {{ request()->routeIs('admin.responsables*') ? 'active' : '' }}" 
+             href="{{ route('admin.responsables.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  {{-- Icono de "Profesional con corbata" para distinguir de Laboratoristas --}}
+                  <i class="fas fa-user-tie text-dark text-lg"></i>
+              </div>
+              <span class="nav-link-text ms-1">Responsables</span>
           </a>
       </li>
 

@@ -6,6 +6,8 @@ use App\Repositories\ServicioRepository;
 use App\Models\Proyecto;
 use App\Models\Laboratorista;
 use App\Models\Ensayo;
+use App\Models\Responsable;
+use App\Models\RespProy;
 use Illuminate\Support\Facades\DB;
 
 class AdministracionService
@@ -18,22 +20,75 @@ class AdministracionService
     }
 
     // --- PROYECTOS ---
+
     public function guardarProyecto(array $data)
     {
         return DB::transaction(function () use ($data) {
-            $id = $this->repo->getNextId('proyectos');
-            return Proyecto::create([
-                'num_sec' => $id,
+            // 1. Crear el Proyecto
+            $idProy = $this->repo->getNextId('proyectos');
+            
+            $proyecto = Proyecto::create([
+                'num_sec' => $idProy,
+                'estructura' => $data['estructura'] ?? null,
                 'descripcion' => $data['descripcion'],
-                'estado' => 'AC'
+                'documento' => $data['documento'] ?? null,
+                'estado' => 'AC',
+                'fecha' => now()
             ]);
+
+            // 2. Asignar Responsable (Tabla Intermedia)
+            if (!empty($data['responsable_id'])) {
+                $idRespProy = $this->repo->getNextId('resp_proy');
+                
+                RespProy::create([
+                    'num_sec' => $idRespProy,
+                    'num_sec_proy' => $proyecto->num_sec,
+                    'num_sec_resp' => $data['responsable_id'],
+                    'fecha' => now(),
+                    'estado' => 'AC'
+                ]);
+            }
+
+            return $proyecto;
+        });
+    }
+
+    public function actualizarProyecto($id, array $data)
+    {
+        return DB::transaction(function () use ($id, $data) {
+            // 1. Actualizar datos básicos
+            $proyecto = Proyecto::findOrFail($id);
+            $proyecto->update([
+                'estructura' => $data['estructura'],
+                'descripcion' => $data['descripcion'],
+                'documento' => $data['documento']
+            ]);
+
+            // 2. Actualizar Responsable
+            // Primero desactivamos el anterior (si existía)
+            RespProy::where('num_sec_proy', $id)->update(['estado' => 'IN']);
+
+            // Creamos la nueva asignación
+            if (!empty($data['responsable_id'])) {
+                $idRespProy = $this->repo->getNextId('resp_proy');
+                RespProy::create([
+                    'num_sec' => $idRespProy,
+                    'num_sec_proy' => $id,
+                    'num_sec_resp' => $data['responsable_id'],
+                    'fecha' => now(),
+                    'estado' => 'AC'
+                ]);
+            }
         });
     }
 
     public function bajaProyecto($id)
     {
         $p = Proyecto::find($id);
-        if($p) $p->update(['estado' => 'IN']);
+        if($p) {
+            $nuevoEstado = ($p->estado === 'AC') ? 'IN' : 'AC';
+            $p->update(['estado' => $nuevoEstado]);
+        }
     }
 
     // --- LABORATORISTAS ---
@@ -86,5 +141,39 @@ class AdministracionService
     {
         $e = Ensayo::find($id);
         if($e) $e->update(['estado' => 'IN']);
+    }
+    // --- MÓDULO DE RESPONSABLES (INGENIEROS/ARQUITECTOS) ---
+
+    public function guardarResponsable(array $data)
+    {
+        return DB::transaction(function () use ($data) {
+            $id = $this->repo->getNextId('responsables');
+            return \App\Models\Responsable::create([
+                'num_sec' => $id,
+                'nombre' => $data['nombre'],
+                'ci' => $data['ci'],
+                'documento' => $data['documento'] ?? null,
+                'estado' => 'AC'
+            ]);
+        });
+    }
+
+    public function bajaResponsable($id)
+    {
+        $r = \App\Models\Responsable::find($id);
+        if($r) {
+            $nuevoEstado = ($r->estado === 'AC') ? 'IN' : 'AC';
+            $r->update(['estado' => $nuevoEstado]);
+        }
+    }
+    
+    public function actualizarResponsable($id, array $data)
+    {
+        $r = \App\Models\Responsable::findOrFail($id);
+        $r->update([
+            'nombre' => $data['nombre'],
+            'ci' => $data['ci'],
+            'documento' => $data['documento']
+        ]);
     }
 }

@@ -13,6 +13,12 @@ use App\Livewire\Servicios\CrearSolicitud;
 use App\Livewire\Admin\Laboratoristas\Listar;
 use App\Livewire\Admin\Laboratoristas\Crear;
 use App\Livewire\Admin\Laboratoristas\Editar;
+use App\Livewire\Admin\Proyectos\Listar as ListarProyectos;
+use App\Livewire\Admin\Proyectos\Crear as CrearProyecto;
+use App\Livewire\Admin\Proyectos\Editar as EditarProyecto;
+use App\Livewire\Admin\Responsables\Listar as ListarResp;
+use App\Livewire\Admin\Responsables\Crear as CrearResp;
+use App\Livewire\Admin\Responsables\Editar as EditarResp;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,13 +77,18 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 	// ... rutas existentes
-	Route::get('/admin/proyectos', \App\Livewire\Admin\Proyectos::class)->name('admin.proyectos');
 	//Route::get('/admin/laboratoristas', \App\Livewire\Admin\Laboratoristas::class)->name('admin.laboratoristas');
 	Route::get('/admin/ensayos', \App\Livewire\Admin\Ensayos::class)->name('admin.ensayos');
 	// Módulo Laboratoristas (CRUD Separado)
     Route::get('/admin/laboratoristas', Listar::class)->name('admin.laboratoristas.index');
     Route::get('/admin/laboratoristas/crear', Crear::class)->name('admin.laboratoristas.crear');
     Route::get('/admin/laboratoristas/{id}/editar', Editar::class)->name('admin.laboratoristas.editar');
+    Route::get('/admin/proyectos', ListarProyectos::class)->name('admin.proyectos.index');
+    Route::get('/admin/proyectos/crear', CrearProyecto::class)->name('admin.proyectos.crear');
+    Route::get('/admin/proyectos/{id}/editar', EditarProyecto::class)->name('admin.proyectos.editar');
+	Route::get('/admin/responsables', ListarResp::class)->name('admin.responsables.index');
+	Route::get('/admin/responsables/crear', CrearResp::class)->name('admin.responsables.crear');
+	Route::get('/admin/responsables/{id}/editar', EditarResp::class)->name('admin.responsables.editar');
 	
 });
 
