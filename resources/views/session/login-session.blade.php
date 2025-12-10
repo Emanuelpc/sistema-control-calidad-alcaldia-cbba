@@ -15,24 +15,43 @@
                 <div class="card-body">
                   <form role="form" method="POST" action="/session">
                     @csrf
+                    
+                    {{-- CAMPO EMAIL --}}
                     <label>Correo</label>
                     <div class="mb-3">
-                      <input type="email" class="form-control" name="email" id="email" placeholder="funcionario@municipio.gob.bo" value="admin@municipio.gob.bo" aria-label="Email" aria-describedby="email-addon">
+                      {{-- 
+                          CAMBIO REALIZADO: 
+                          1. Se eliminó value="admin@municipio.gob.bo" 
+                          2. Se puso value="{{ old('email') }}" para recordar el correo si falla la contraseña
+                      --}}
+                      <input type="email" class="form-control" name="email" id="email" 
+                             placeholder="funcionario@municipio.gob.bo" 
+                             value="{{ old('email') }}" 
+                             aria-label="Email" aria-describedby="email-addon">
                       @error('email')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                       @enderror
                     </div>
+
+                    {{-- CAMPO CONTRASEÑA --}}
                     <label>Contraseña</label>
                     <div class="mb-3">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese su contraseña" value="secret" aria-label="Password" aria-describedby="password-addon">
+                      {{-- 
+                          CAMBIO REALIZADO: 
+                          1. Se eliminó value="secret". Ahora el campo empieza vacío.
+                      --}}
+                      <input type="password" class="form-control" name="password" id="password" 
+                             placeholder="Ingrese su contraseña" 
+                             aria-label="Password" aria-describedby="password-addon">
                       @error('password')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                       @enderror
                     </div>
-                    <div class="form-check form-switch">
+
+                    <!--<div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                       <label class="form-check-label" for="rememberMe">Recordar credenciales</label>
-                    </div>
+                    </div>-->
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Ingresar al Sistema</button>
                     </div>

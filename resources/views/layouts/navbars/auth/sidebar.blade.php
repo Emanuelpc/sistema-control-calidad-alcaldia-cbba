@@ -1,18 +1,21 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 fixed-start bg-white" id="sidenav-main">
   
-  {{-- CABECERA DEL SIDEBAR --}}
-  <div class="sidenav-header">
+  {{-- CABECERA DEL SIDEBAR MODIFICADA --}}
+  {{-- Aumentamos la altura del contenedor para que quepa el logo grande --}}
+  <div class="sidenav-header" style="height: 5rem;"> 
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
-        <img src="{{ asset('assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-3 font-weight-bold">Control de Calidad</span>
+        {{-- Logo con altura personalizada (60px) y sin restricciones de clase --}}
+        <img src="{{ asset('assets/img/logoalcaldia.png') }}" style="max-height: 60px; width: auto;" alt="main_logo">
+        <span class="ms-3 font-weight-bold">Control de Calidad <br>G.A.M.C</span>
     </a>
   </div>
 
   <hr class="horizontal dark mt-0">
 
-  {{-- CUERPO DEL SIDEBAR (Con Scroll ajustado) --}}
-  <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main" style="height: calc(100vh - 120px);">
+  {{-- CUERPO DEL SIDEBAR --}}
+  {{-- Ajustamos la resta a -150px para compensar la cabecera más grande --}}
+  <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main" style="height: calc(100vh - 150px);">
     <ul class="navbar-nav">
       
       {{-- 1. INICIO --}}
@@ -45,7 +48,6 @@
       </li>
 
       <li class="nav-item">
-          {{-- NOTA: El routeIs ahora busca cualquier sub-ruta de proyectos con el * --}}
           <a class="nav-link {{ request()->routeIs('admin.proyectos*') ? 'active' : '' }}" 
              href="{{ route('admin.proyectos.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -75,55 +77,14 @@
       </li>
 
       <li class="nav-item">
-          {{-- Detecta si estamos en cualquier página de responsables (index, crear o editar) --}}
           <a class="nav-link {{ request()->routeIs('admin.responsables*') ? 'active' : '' }}" 
              href="{{ route('admin.responsables.index') }}">
               <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                  {{-- Icono de "Profesional con corbata" para distinguir de Laboratoristas --}}
                   <i class="fas fa-user-tie text-dark text-lg"></i>
               </div>
               <span class="nav-link-text ms-1">Responsables</span>
           </a>
       </li>
-
-      {{-- ELEMENTOS ORIGINALES COMENTADOS (Para referencia futura) --}}
-      {{--
-      <li class="nav-item mt-3">
-        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('user-profile') ? 'active' : '') }} " href="{{ url('user-profile') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="fas fa-user text-dark text-lg"></i>
-            </div>
-            <span class="nav-link-text ms-1">User Profile</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('user-management') ? 'active' : '') }}" href="{{ url('user-management') }}">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="fas fa-list-ul text-dark text-lg"></i>
-            </div>
-            <span class="nav-link-text ms-1">User Management</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('tables') ? 'active' : '') }}" href="{{ url('tables') }}">
-          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-table text-dark text-lg"></i>
-          </div>
-          <span class="nav-link-text ms-1">Tables</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ (Request::is('billing') ? 'active' : '') }}" href="{{ url('billing') }}">
-          <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            <i class="fas fa-credit-card text-dark text-lg"></i>
-          </div>
-          <span class="nav-link-text ms-1">Billing</span>
-        </a>
-      </li>
-      --}}
       
     </ul>
   </div>
