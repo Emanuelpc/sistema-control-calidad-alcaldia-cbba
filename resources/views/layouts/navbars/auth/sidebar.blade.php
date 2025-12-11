@@ -41,6 +41,15 @@
               <span class="nav-link-text ms-1">Nueva Solicitud</span>
           </a>
       </li>
+      <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('servicios.listar') ? 'active' : '' }}" 
+             href="{{ route('servicios.listar') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fas fa-file-alt text-dark text-lg"></i>
+              </div>
+              <span class="nav-link-text ms-1">Solicitudes</span>
+          </a>
+      </li>
 
       {{-- 3. ADMINISTRACIÓN --}}
       <li class="nav-item mt-3">
@@ -63,6 +72,15 @@
                   <i class="fas fa-vial text-dark text-lg"></i>
               </div>
               <span class="nav-link-text ms-1">Ensayos</span>
+          </a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link {{ request()->routeIs('admin.tipos-ensayo*') ? 'active' : '' }}" 
+             href="{{ route('admin.tipos-ensayo.index') }}">
+              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                  <i class="fas fa-tags text-dark text-lg"></i>
+              </div>
+              <span class="nav-link-text ms-1">Tipos de Ensayo</span>
           </a>
       </li>
 

@@ -19,6 +19,12 @@ use App\Livewire\Admin\Proyectos\Editar as EditarProyecto;
 use App\Livewire\Admin\Responsables\Listar as ListarResp;
 use App\Livewire\Admin\Responsables\Crear as CrearResp;
 use App\Livewire\Admin\Responsables\Editar as EditarResp;
+use App\Livewire\Admin\TiposEnsayo\ListarTipoEnsayo;
+use App\Livewire\Admin\TiposEnsayo\CrearTipoEnsayo;
+use App\Livewire\Admin\TiposEnsayo\EditarTipoEnsayo;
+use App\Livewire\Servicios\ListarSolicitudes;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +95,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/admin/responsables', ListarResp::class)->name('admin.responsables.index');
 	Route::get('/admin/responsables/crear', CrearResp::class)->name('admin.responsables.crear');
 	Route::get('/admin/responsables/{id}/editar', EditarResp::class)->name('admin.responsables.editar');
+	// CRUD Tipos de Ensayo
+	Route::prefix('admin/tipos-ensayo')->group(function () {
+		Route::get('/', ListarTipoEnsayo::class)->name('admin.tipos-ensayo.index');
+		Route::get('/crear', CrearTipoEnsayo::class)->name('admin.tipos-ensayo.crear');
+		Route::get('/{id}/editar', EditarTipoEnsayo::class)->name('admin.tipos-ensayo.editar');
+	});
+	// Lista de Solicitudes
+	Route::get('/servicios/listar', ListarSolicitudes::class)->name('servicios.listar');
+
 	
 });
 
