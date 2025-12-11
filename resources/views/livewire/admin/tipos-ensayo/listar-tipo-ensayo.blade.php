@@ -21,6 +21,7 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">#</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descripción</th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,10 +38,26 @@
                                             {{ $tipo->estado == 'AC' ? 'Activo' : 'Inactivo' }}
                                         </span>
                                     </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <!-- Botón Editar -->
+                                            <a href="{{ route('admin.tipos-ensayo.editar', $tipo->num_sec) }}" class="mx-1">
+                                                <i class="fas fa-edit text-secondary"></i>
+                                            </a>
+
+                                            <!-- Switch Activar/Inactivar -->
+                                            <div class="form-check form-switch ms-2 mb-0">
+                                                <input class="form-check-input" type="checkbox" id="switch-{{ $tipo->num_sec }}"
+                                                    wire:click="toggleEstado({{ $tipo->num_sec }})"
+                                                    {{ $tipo->estado == 'AC' ? 'checked' : '' }}>
+                                                <label class="form-check-label" for="switch-{{ $tipo->num_sec }}"></label>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="3" class="text-center py-4">No hay tipos de ensayo registrados.</td>
+                                    <td colspan="4" class="text-center py-4">No hay tipos de ensayo registrados.</td>
                                 </tr>
                                 @endforelse
                             </tbody>

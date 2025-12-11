@@ -67,13 +67,15 @@
       </li>
 
       <li class="nav-item">
-          <a class="nav-link {{ request()->routeIs('admin.ensayos') ? 'active' : '' }}" href="{{ route('admin.ensayos') }}">
-              <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                  <i class="fas fa-vial text-dark text-lg"></i>
-              </div>
-              <span class="nav-link-text ms-1">Ensayos</span>
-          </a>
+            <a class="nav-link {{ request()->routeIs('admin.ensayos.*') ? 'active' : '' }}" 
+            href="{{ route('admin.ensayos.index') }}">
+                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-vial text-dark text-lg"></i>
+                </div>
+                <span class="nav-link-text ms-1">Ensayos</span>
+            </a>
       </li>
+
       <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('admin.tipos-ensayo*') ? 'active' : '' }}" 
              href="{{ route('admin.tipos-ensayo.index') }}">

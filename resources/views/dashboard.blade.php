@@ -48,7 +48,7 @@
     <div class="col-md-3 mb-4">
       <div class="card h-100 card-plain border">
         <div class="card-body text-center p-3">
-            <a href="{{ route('admin.ensayos') }}" class="text-decoration-none text-body">
+            <a href="{{ route('admin.ensayos.index') }}" class="text-decoration-none text-body">
                 <div class="icon icon-shape icon-lg bg-gradient-success shadow mx-auto mb-3">
                     <i class="fas fa-vial text-lg opacity-10"></i>
                 </div>

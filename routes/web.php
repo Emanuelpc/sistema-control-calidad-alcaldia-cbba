@@ -23,6 +23,9 @@ use App\Livewire\Admin\TiposEnsayo\ListarTipoEnsayo;
 use App\Livewire\Admin\TiposEnsayo\CrearTipoEnsayo;
 use App\Livewire\Admin\TiposEnsayo\EditarTipoEnsayo;
 use App\Livewire\Servicios\ListarSolicitudes;
+use App\Livewire\Admin\Ensayos\ListarEnsayos;
+use App\Livewire\Admin\Ensayos\CrearEnsayo;
+use App\Livewire\Admin\Ensayos\EditarEnsayo;
 
 
 /*
@@ -84,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('sign-up');
 	// ... rutas existentes
 	//Route::get('/admin/laboratoristas', \App\Livewire\Admin\Laboratoristas::class)->name('admin.laboratoristas');
-	Route::get('/admin/ensayos', \App\Livewire\Admin\Ensayos::class)->name('admin.ensayos');
+	//Route::get('/admin/ensayos', \App\Livewire\Admin\Ensayos::class)->name('admin.ensayos');
 	// Módulo Laboratoristas (CRUD Separado)
     Route::get('/admin/laboratoristas', Listar::class)->name('admin.laboratoristas.index');
     Route::get('/admin/laboratoristas/crear', Crear::class)->name('admin.laboratoristas.crear');
@@ -101,6 +104,13 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/crear', CrearTipoEnsayo::class)->name('admin.tipos-ensayo.crear');
 		Route::get('/{id}/editar', EditarTipoEnsayo::class)->name('admin.tipos-ensayo.editar');
 	});
+	// CRUD Ensayos
+	Route::prefix('admin/ensayos')->name('admin.ensayos.')->group(function () {
+		Route::get('/', ListarEnsayos::class)->name('index');
+		Route::get('/crear', CrearEnsayo::class)->name('crear');
+		Route::get('/editar/{id}', EditarEnsayo::class)->name('editar');
+	});
+
 	// Lista de Solicitudes
 	Route::get('/servicios/listar', ListarSolicitudes::class)->name('servicios.listar');
 

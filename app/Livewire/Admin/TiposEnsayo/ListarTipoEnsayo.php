@@ -22,4 +22,13 @@ class ListarTipoEnsayo extends Component
         ->extends('layouts.user_type.auth') // Usa el layout principal
         ->section('content'); // Coloca el contenido en la sección 'content'
     }
+    public function toggleEstado($id)
+    {
+        $tipo = TipoEnsayo::find($id);
+        if ($tipo) {
+            $tipo->estado = $tipo->estado === 'AC' ? 'IN' : 'AC';
+            $tipo->save();
+        }
+    }
+
 }
