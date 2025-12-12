@@ -7,7 +7,7 @@
     <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
         {{-- Logo con altura personalizada (60px) y sin restricciones de clase --}}
         <img src="{{ asset('assets/img/logoalcaldia.png') }}" style="max-height: 60px; width: auto;" alt="main_logo">
-        <span class="ms-3 font-weight-bold">Control de Calidad <br>G.A.M.C</span>
+        <span class="ms-3 font-weight-bold">Sistema Control de Calidad 
     </a>
   </div>
 
